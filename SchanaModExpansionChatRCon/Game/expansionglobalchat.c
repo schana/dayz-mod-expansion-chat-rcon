@@ -2,28 +2,30 @@ modded class ExpansionGlobalChat
 {
 	void ExpansionGlobalChat()
 	{
-		GetRPCManager().AddRPC( "SchanaMod", "DirectChat", this, SingeplayerExecutionType.Both );
-		GetRPCManager().AddRPC( "SchanaMod", "DirectChatServer", this, SingeplayerExecutionType.Both );
+		GetRPCManager().AddRPC("SchanaMod", "DirectChat", this, SingeplayerExecutionType.Both);
+		GetRPCManager().AddRPC("SchanaMod", "DirectChatServer", this, SingeplayerExecutionType.Both);
 	}
 
 	void DirectChatServer(CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target)
 	{
-		Param2< string, string > data;
-        if ( !ctx.Read( data ) ) return;
+		Param2<string, string> data;
+		if (!ctx.Read(data))
+			return;
 
-		if( type == CallType.Client )
-        {	
+		if (type == CallType.Client)
+		{
 			GetGame().GetMission().OnEvent(ChatMessageEventTypeID, new ChatMessageEventParams(ExpansionChatChannels.CCTransport, data.param1, data.param2, ""));
 		}
 	}
-	
+
 	void DirectChat(CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target)
 	{
-		Param2< string, string > data;
-        if ( !ctx.Read( data ) ) return;
+		Param2<string, string> data;
+		if (!ctx.Read(data))
+			return;
 
-		if( type == CallType.Server )	
-        {
+		if (type == CallType.Server)
+		{
 			string name = sender.GetName();
 			string steamid = sender.GetPlainId();
 			string bisid = sender.GetId();
@@ -34,15 +36,15 @@ modded class ExpansionGlobalChat
 
 			GetGame().AdminLog(format);
 
-			GetRPCManager().SendRPC( "SchanaMod", "DirectChatServer", new Param2< string, string >(data.param1, data.param2) );	
+			GetRPCManager().SendRPC("SchanaMod", "DirectChatServer", new Param2<string, string>(data.param1, data.param2));
 		}
 	}
 
 	void SendDirectChat(string text)
 	{
 		string name;
-		GetGame().GetPlayerName( name );
-		
-		GetRPCManager().SendRPC( "SchanaMod", "DirectChat", new Param2< string, string >(name, text) );	
+		GetGame().GetPlayerName(name);
+
+		GetRPCManager().SendRPC("SchanaMod", "DirectChat", new Param2<string, string>(name, text));
 	}
 }

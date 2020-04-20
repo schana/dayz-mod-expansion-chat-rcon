@@ -1,5 +1,3 @@
-[h1]SchanaModExpansionChatRCon[/h1]
-
 An Open Source DayZ mod that alters the Expansion Chat by sending all chat messages through the native direct chat call, which internally sends an RCon message. This allows side and direct chat to be read via RCon. Inside the game, direct messages are duplicated and sent to the Transport chat channel.
 
 You are free to use this mod on your monetized servers. If you repack or use the code in a Derivative Work, you [b]must[/b] include the entire contents of the NOTICE file in a readable place in accordance with the Apache License.

@@ -34,7 +34,8 @@ class CfgMods
 			};
 			class missionScriptModule
 			{
-				files[] = {
+				files[] =
+				{
 					"SchanaModExpansionChatRCon/Mission"
 				};
 			};

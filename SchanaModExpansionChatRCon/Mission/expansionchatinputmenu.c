@@ -1,48 +1,49 @@
 modded class ExpansionChatInputMenu extends UIScriptedMenu
 {
-    override bool OnChange(Widget w, int x, int y, bool finished)
+	override bool OnChange(Widget w, int x, int y, bool finished)
 	{
-        // super call manually because inheritance is weird
-		if ( UIScriptedWindow.GetActiveWindows() )
+		// super call manually because inheritance is weird
+		if (UIScriptedWindow.GetActiveWindows())
 		{
-			for ( int i = 0; i < UIScriptedWindow.GetActiveWindows().Count(); i++ )
+			for (int i = 0; i < UIScriptedWindow.GetActiveWindows().Count(); i++)
 			{
-				if ( UIScriptedWindow.GetActiveWindows().GetElement( i ).OnChange( w, x, y, finished ) )
+				if (UIScriptedWindow.GetActiveWindows().GetElement(i).OnChange(w, x, y, finished))
 				{
-					
 				}
 			}
 		}
-		
-		if (!finished) return false;
+
+		if (!finished)
+			return false;
 
 		string text = m_edit_box.GetText();
 
 		if (text != "")
 		{
-			MissionGameplay gameplayMission = MissionGameplay.Cast( GetGame().GetMission() );
+			MissionGameplay gameplayMission = MissionGameplay.Cast(GetGame().GetMission());
 
 			string name;
-			GetGame().GetPlayerName( name );
+			GetGame().GetPlayerName(name);
 
-			if( GetGame().IsMultiplayer() )
+			if (GetGame().IsMultiplayer())
 			{
-				if (gameplayMission.GetChatChannel() == ExpansionChatChannels.CCGlobal) {
+				if (gameplayMission.GetChatChannel() == ExpansionChatChannels.CCGlobal)
+				{
 					gameplayMission.m_ChatChannelName.SetAlpha(0);
 					GetExpansionChatBase().SendGlobalChat(text);
 				}
-                else
-                {
-                    gameplayMission.m_ChatChannelName.SetAlpha(0);
+				else
+				{
+					gameplayMission.m_ChatChannelName.SetAlpha(0);
 					GetExpansionChatBase().SendDirectChat(text);
-                }
-                GetGame().ChatPlayer(text);
+				}
+				GetGame().ChatPlayer(text);
 			}
 
-			if( !GetGame().IsMultiplayer() )
+			if (!GetGame().IsMultiplayer())
 			{
-				ChatMessageEventParams chat_params = new ChatMessageEventParams( gameplayMission.GetChatChannel(), name, text, "" );
-				gameplayMission.m_Chat.Add( chat_params );
+				ChatMessageEventParams chat_params = new ChatMessageEventParams(gameplayMission.GetChatChannel(), name, text, "");
+				gameplayMission.m_Chat.Add(chat_params);
 			}
 		}
 
