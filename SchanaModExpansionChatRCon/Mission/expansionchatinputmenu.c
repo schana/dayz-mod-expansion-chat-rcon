@@ -27,15 +27,18 @@ modded class ExpansionChatInputMenu extends UIScriptedMenu
 
 			if (GetGame().IsMultiplayer())
 			{
-				if (gameplayMission.GetChatChannel() == ExpansionChatChannels.CCGlobal)
+				if (text.IndexOf("#") != 0)
 				{
-					gameplayMission.m_ChatChannelName.SetAlpha(0);
-					GetExpansionChatBase().SendGlobalChat(text);
-				}
-				else
-				{
-					gameplayMission.m_ChatChannelName.SetAlpha(0);
-					GetExpansionChatBase().SendDirectChat(text);
+					if (gameplayMission.GetChatChannel() == ExpansionChatChannels.CCGlobal)
+					{
+						gameplayMission.m_ChatChannelName.SetAlpha(0);
+						GetExpansionChatBase().SendGlobalChat(text);
+					}
+					else
+					{
+						gameplayMission.m_ChatChannelName.SetAlpha(0);
+						GetExpansionChatBase().SendDirectChat(text);
+					}
 				}
 				GetGame().ChatPlayer(text);
 			}
