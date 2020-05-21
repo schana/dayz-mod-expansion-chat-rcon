@@ -20,18 +20,10 @@ class CfgMods
 		type = "mod";
 		dependencies[] =
 		{
-			"Game",
 			"Mission"
 		};
 		class defs
 		{
-			class gameScriptModule
-			{
-				files[] =
-				{
-					"SchanaModExpansionChatRCon/Game"
-				};
-			};
 			class missionScriptModule
 			{
 				files[] =

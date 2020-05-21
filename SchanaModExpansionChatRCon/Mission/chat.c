@@ -1,13 +1,9 @@
-modded class Chat
-{
-    override void Add(ChatMessageEventParams params)
-    {
+modded class Chat {
+    override void Add (ChatMessageEventParams params) {
         int channel = params.param1;
-        if (channel == 0 || channel == CCDirect)
-        {
+        if ((channel == CCDirect || channel == 0) && params.param3.IndexOf ("ᐅ") == 0) {
             return;
         }
-
-        super.Add(params);
+        super.Add (params);
     }
 }
